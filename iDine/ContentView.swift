@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    let menus = Bundle.main.decode([MenuSection].self, from: "menu.json")
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            NavigationStack {
+                List {
+                    ForEach(menus) { section in
+                        Section(section.name) {
+                            ForEach(section.items) { item in
+                                Text(item.name)
+                            }
+                        }
+                    }
+                }
+                .navigationTitle("Hai")
+                .listStyle(PlainListStyle())
+            }
         }
-        .padding()
     }
 }
 

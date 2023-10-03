@@ -17,6 +17,9 @@ struct ItemDetail: View {
                 Text("Photo: \(item.photoCredit)").padding(4).background(.black).font(.caption).foregroundStyle(.white).offset(x: -5,y: -5)
             }
             Text(item.description).padding()
+            Button("Order This") {
+                Order().add(item: item)
+            }.buttonStyle(.borderedProminent)
             
             Spacer()
         }
@@ -26,5 +29,7 @@ struct ItemDetail: View {
 }
 
 #Preview {
-    ItemDetail(item: MenuItem.example)
+    NavigationStack {
+        ItemDetail(item: MenuItem.example).environmentObject(Order())
+    }
 }

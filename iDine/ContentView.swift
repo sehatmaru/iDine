@@ -17,12 +17,17 @@ struct ContentView: View {
                     ForEach(menus) { section in
                         Section(section.name) {
                             ForEach(section.items) { item in
-                                ItemRow(menu: item)
+                                NavigationLink(value: item) {
+                                    ItemRow(menu: item)
+                                }
                             }
                         }
                     }
                 }
-                .navigationTitle("Hai")
+                .navigationDestination(for: MenuItem.self) { item in
+                    ItemDetail(item: item)
+                }
+                .navigationTitle("iDine")
                 .listStyle(PlainListStyle())
             }
         }

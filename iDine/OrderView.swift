@@ -25,8 +25,8 @@ struct OrderView: View {
                 
                 Section {
                     NavigationLink("Place Order") {
-                        Text("Check Out")
-                    }
+                        CheckoutView()
+                    }.disabled(order.total == 0)
                 }
             }
         }

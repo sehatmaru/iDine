@@ -9,8 +9,11 @@ import SwiftUI
 
 struct CheckoutView: View {
     @EnvironmentObject var order: Order
-    @State private var paymentType = "Cash"
+    
+    @State private var showingPaymentAlert = false
     @State private var addLoyaltyDetails = false
+    
+    @State private var paymentType = "Cash"
     @State private var loyaltyNumber = ""
     @State private var tipAmount = 0
 
@@ -50,7 +53,11 @@ struct CheckoutView: View {
             
             Section("Total: \(totalPrice)") {
                 Button("Confirm order") {
-                    // place the order
+                    showingPaymentAlert.toggle()
+                }.alert("Order Confirmed", isPresented: $showingPaymentAlert) {
+                    
+                } message: {
+                    Text("Your total was \(totalPrice) – thank you!")
                 }
             }
         }
